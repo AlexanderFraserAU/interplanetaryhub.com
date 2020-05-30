@@ -5,7 +5,7 @@ $GLOBALS['config'] = array(
     'host' => '127.0.0.1',
     'username' => 'root',
     'password' => '',
-    'db' => 'webscapeusers'
+    'db' => 'interplanetaryhub'
   ),
   'remember'	=> array(
     'cookieName'	=> 'HASH',
