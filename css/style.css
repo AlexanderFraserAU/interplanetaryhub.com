@@ -1,119 +1,106 @@
-@import url('https://fonts.googleapis.com/css2?family=Crete+Round&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Fredoka+One&family=Quicksand&display=swap');
+* {
+  all: initial;
+  * {
+    all: unset;
+  }
+}
+
+* {
+ font-family: 'Open Sans', sans-serif;
+}
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #C8C8C8;
-    overflow-x: hidden;
-    font-family: 'Quicksand', sans-serif;
+  display: grid;
+
 }
 
-header {
-    background-image: url(../images/html-computer.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    margin-bottom: 50px;
-    box-shadow: 1px 10px 60px #000;
+.logo {
+
 }
 
-.center {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    padding: 14px 25px;
-    background-color: rgba(0, 0, 0, 0.4);
+.nav {
+  display: grid;
+  margin: 0 5%;
+  margin-top: 30px;
+  border: solid black 1px;
+  text-align: center;
 }
 
-.floated-links {
-    margin: 0;
-    float: right;
-    z-index: 99;
-    padding: 14px 25px;
-    position: relative;
-}
-
-.center a:link, .center a:visited {
-    text-decoration: none;
-    color: #fff;
-    padding: 14px 25px;
-}
-
-.floated-links a:link, .floated-links a:visited {
-    text-decoration: none;
-    color: #fff;
-    padding: 14px 25px;
-}
-
-.center a:hover {
-    text-decoration: underline;
-    background-color: #383838;
-}
-
-.floated-links a:hover {
-    text-decoration: underline;
-    background-color: #383838;
-}
-
-.main-title {
-    text-align: center;
-    padding-top: 350px;
-    padding-bottom: 350px;
-    color: #fff;
-}
-
-.main-title a:link, .main-title a:visited {
-    text-decoration: none;
-    color: #000;
-    padding: 14px 25px;
-    background-color: #D0D0D0;
-    border-radius: 10px;
-}
-
-.main-title a:hover {
-    text-decoration: underline;
-    background-color: #B0B0B0;
-}
-
-.main-title h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 60px;
-    font-family: 'Crete Round', serif;
-}
-
-.main-title p {
-    padding-bottom: 20px;
-}
-
-#about {
-    background-color: #fff;
-    background-image: url(../images/paper-fibres.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    text-align: center;
-    width: 60%;
-    margin: auto;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 1px 10px 60px #000;
-}
-
-footer {
-    text-align: center;
-    color: #fff;
-    padding: 14px 25px;
-    background-color: rgba(105, 105, 105, 0.4);
-}
-
-.footer-links:link, .footer-links:visited {
-    text-decoration: none;
-    color: #fff;
-}
 main {
-    margin-bottom: 50px;
+  display: grid;
+}
+
+.featured {
+  display: grid;
+  margin: 0 5%;
+  margin-top: 30px;
+  border: solid black 1px;
+  text-align: center;
+}
+
+.search {
+  margin: 0 5%;
+  margin-top: 30px;
+
+  border: solid black 1px;
+  display: grid;
+  grid-template-areas:
+    "filterbox searchbar"
+    "results results";
+  grid-template-rows: 100px 400px;
+  grid-template-columns: 20% 80% ;
+}
+
+.filterbox {
+  grid-area: filterbox;
+  border: solid black 1px;
+}
+
+.searchbar {
+  grid-area: searchbar;
+  font-size: 40px;
+  background-color: rgb(104,104,104, 0.2);
+  text-indent: 10px;
+}
+
+.results {
+  grid-area: results;
+}
+
+.result {
+  display: grid;
+  grid-template-areas:
+    "hash-info score";
+  grid-template-columns: 20% 80%;
+  margin: 10px;
+}
+
+.hash-info {
+  grid-area: hash-info;
+  display: grid;
+  grid-template-areas:
+    "name"
+    "hash";
+  grid-template-rows: 15px 15px;
+}
+
+.name {
+  grid-area: name;
+}
+
+.hash {
+  grid-area: hash;
+  font-size: 10px;
+}
+
+.score {
+  grid-area: score;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.footer {
+
 }
