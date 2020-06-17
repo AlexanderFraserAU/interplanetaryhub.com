@@ -13,7 +13,7 @@
 
 				return $config;
 			}
-			
+
 			return false;
 		}
 	}
