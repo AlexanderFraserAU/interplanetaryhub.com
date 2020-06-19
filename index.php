@@ -8,6 +8,8 @@ if (Session::exists('home')) {
 
 $user = new User();
 if ($user->isLoggedIn()) {
+
+
 ?>
 
 <!DOCTYPE html>
@@ -18,9 +20,9 @@ if ($user->isLoggedIn()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <script src="javascript/script.js" type="text/javascript">
-    </script>
+    <script src="javascript/script.js" type="text/javascript"></script>
 <body>
+
   <div class="logo">Logo</div>
   <div class="nav">Nav
     <p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?></a>!</p>
@@ -45,8 +47,21 @@ if ($user->isLoggedIn()) {
   </main>
   <div class="footer">Footer</div>
 </body>
-
 <?php
+  try {
+    for ($i=0; $i < 3; $i++) { //Featured
+      $location = "featured";
+      $link = new Link($i, $location);
+      echo "<script> addResult({$i}, {$location}, {$link->data()->name}, {$link->data()->hash}, {$link->data()->upvotes}, {$link->data()->downvotes}) </script>";
+    }
+    for ($i=0; $i < 10; $i++) { //Results
+      $location = "results";
+      $link = new Link($i, $location);
+      echo "<script> addResult({$i}, {$location}, {$link->data()->name}, {$link->data()->hash}, {$link->data()->upvotes}, {$link->data()->downvotes}) </script>";
+    }
+  } catch (Exception $e) {
+    die($e->getMessage());
+  }
 	} else {
 		echo "<p>You need to <a href='login.php'>login</a> or <a href='register.php'>register</a></p>";
 	}

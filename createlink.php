@@ -1,13 +1,11 @@
 <?php
-  // QmZqkuqX1qTspb1GgmnzyRFetf1uMyA3CemvvgPZD39sPo
+    // QmZqkuqX1qTspb1GgmnzyRFetf1uMyA3CemvvgPZD39s11
   require_once 'core/init.php';
   $user = new User();
 
   if (!$user->isLoggedIn()) {
     Redirect::to('index.php');
   }
-
-
 
   if (Input::exists()) {
 		if (Token::check(Input::get('token'))) {
@@ -30,7 +28,7 @@
 
 			if ($validation->passed()) {
 				$link = new Link();
-
+        $log = new Log();
 				try {
 					$link->create(array(
 						'name' => Input::get('hashname'),
@@ -38,6 +36,12 @@
             'created' => date('Y-m-d H:i:s'),
             'user_id' => $user->data()->id
 					));
+          $log->createLink(array(
+            'user_id' => $user->data()->id,
+            'activity_type' => 1,
+            'activity_reference' => $link->data()->id,
+            'created' => date('Y-m-d H:i:s')
+          ));
 					Session::flash('home','Your link has been created');
 					Redirect::to('index.php');
 				} catch (Exception $e) {

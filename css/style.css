@@ -1,17 +1,9 @@
 * {
-  all: initial;
-  * {
-    all: unset;
-  }
-}
-
-* {
  font-family: 'Open Sans', sans-serif;
 }
 
 body {
   display: grid;
-
 }
 
 .logo {
@@ -24,6 +16,11 @@ body {
   margin-top: 30px;
   border: solid black 1px;
   text-align: center;
+}
+
+.nav * {
+  all: initial;
+  font-family: 'Open Sans', sans-serif;
 }
 
 main {
@@ -48,7 +45,7 @@ main {
     "filterbox searchbar"
     "results results";
   grid-template-rows: 100px 400px;
-  grid-template-columns: 20% 80% ;
+  grid-template-columns: 20% auto ;
 }
 
 .filterbox {
@@ -86,6 +83,7 @@ main {
 
 .name {
   grid-area: name;
+  text-align: left;
 }
 
 .hash {
