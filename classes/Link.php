@@ -7,6 +7,26 @@
     public function __construct($number = null, $type = null) {
       $this->_db 			= Database::getInstance();
 
+      if ($type) {
+        switch ($type) {
+          case 'featured':
+            $data 	= $this->_db->get('featured_links', array('id', '=', $number));
+            $this->_data  = $data->first();
+            if ($data->count()) {
+              $this->_data  = $data->first();
+            }
+            break;
+          case "results_initial":
+            $data 	= $this->_db->get('links', array('id', '=', $number));
+            if ($data->count()) {
+              $this->_data  = $data->first();
+            }
+            break;
+          default:
+            // code...
+            break;
+        }
+      }
     }
 
     public function create($fields = array()) {

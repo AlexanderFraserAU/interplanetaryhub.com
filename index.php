@@ -49,15 +49,21 @@ if ($user->isLoggedIn()) {
 </body>
 <?php
   try {
-    for ($i=0; $i < 3; $i++) { //Featured
-      $location = "featured";
+    // for ($i=1; $i < 3; $i++) { //Featured
+    //   $location = "featured";
+    //   $link = new Link($i, $location);
+    //   echo "<script> addResult({$i}, {$location}, {$link->data()->name}, {$link->data()->hash}, {$link->data()->upvotes}, {$link->data()->downvotes}) </script>";
+    // }
+    for ($i=1; $i < 10; $i++) { //Results
+      $location = "results_initial";
       $link = new Link($i, $location);
-      echo "<script> addResult({$i}, {$location}, {$link->data()->name}, {$link->data()->hash}, {$link->data()->upvotes}, {$link->data()->downvotes}) </script>";
-    }
-    for ($i=0; $i < 10; $i++) { //Results
-      $location = "results";
-      $link = new Link($i, $location);
-      echo "<script> addResult({$i}, {$location}, {$link->data()->name}, {$link->data()->hash}, {$link->data()->upvotes}, {$link->data()->downvotes}) </script>";
+      $location = explode('_', $location);
+      $location = $location[0]; $location = '"' . $location . '"';
+      $data = json_decode(json_encode($link->data()), 1);
+      $name = $data['name']; $name = '"' . $name . '"';
+      $hash = $data['hash']; $hash = '"' . $hash . '"';
+      $upvotes = $data['upvotes']; $downvotes = $data['downvotes'];
+      echo "<script> addResult({$i}, {$location}, {$name}, {$hash}, {$upvotes}, {$downvotes}) </script>";
     }
   } catch (Exception $e) {
     die($e->getMessage());
