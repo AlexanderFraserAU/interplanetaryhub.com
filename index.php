@@ -54,7 +54,7 @@ if ($user->isLoggedIn()) {
     //   $link = new Link($i, $location);
     //   echo "<script> addResult({$i}, {$location}, {$link->data()->name}, {$link->data()->hash}, {$link->data()->upvotes}, {$link->data()->downvotes}) </script>";
     // }
-    for ($i=1; $i < 10; $i++) { //Results
+    for ($i=0; $i <= 5; $i++) { //Results
       $location = "results_initial";
       $link = new Link($i, $location);
       $location = explode('_', $location);

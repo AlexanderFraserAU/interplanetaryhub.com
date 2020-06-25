@@ -1,5 +1,5 @@
 <?php
-  class Log {
+  class Log { // Maybe disolve this into each section. For example move createLink to Link.php
     private $_db;
 
     public function __construct() {

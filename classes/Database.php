@@ -70,6 +70,18 @@
 			return $this->action('DELETE', $table, $where);
 		}
 
+		public function getInOrder($table, $order, $orderType) { // Get a table ordered by something // May want to get rid of $where //May want to add a $limit
+			return $this->actionInOrder('SELECT *', $table, $order, $orderType);
+		}
+
+		public function actionInOrder($action, $table, $order, $orderType) {
+			$sql = "{$action} FROM {$table} ORDER BY ? {$orderType}";
+			if (!$this->query($sql, array($order))->error()) {
+				return $this;
+			}
+			return false;
+		}
+
 		public function insert($table, $fields = array()) {
 			if (count($fields)) {
 				$keys 	= array_keys($fields);
@@ -106,7 +118,7 @@
 			}
 
 			$sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
-			
+
 			if (!$this->query($sql, $fields)->error()) {
 				return true;
 			}
@@ -117,8 +129,8 @@
 			return $this->_results;
 		}
 
-		public function first() {
-			return $this->_results[0];
+		public function index($index) {
+			return $this->_results[$index];
 		}
 
 		public function error() {

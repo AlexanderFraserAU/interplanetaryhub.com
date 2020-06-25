@@ -1,5 +1,5 @@
 <?php
-    // QmZqkuqX1qTspb1GgmnzyRFetf1uMyA3CemvvgPZD39s11
+    // QmZqkuqX1qTspb1GgmnzyRFetf1uMyA3CemvvgPZD39ss1
   require_once 'core/init.php';
   $user = new User();
 
@@ -36,11 +36,15 @@
             'created' => date('Y-m-d H:i:s'),
             'user_id' => $user->data()->id
 					));
+          $link->newLink(array(
+            'link_id' => $link->data()->id,
+            'created' => $link->data()->created
+          ));
           $log->createLink(array(
             'user_id' => $user->data()->id,
             'activity_type' => 1,
             'activity_reference' => $link->data()->id,
-            'created' => date('Y-m-d H:i:s')
+            'created' => $user->data()->created
           ));
 					Session::flash('home','Your link has been created');
 					Redirect::to('index.php');

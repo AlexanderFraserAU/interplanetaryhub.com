@@ -40,8 +40,7 @@
 						'password' 	=> Hash::make(Input::get('password'),$salt),
 						'salt' 		=> $salt,
 						'name' 		=> Input::get('name'),
-						'joined' 	=> date('Y-m-d H:i:s'),
-						'group'	=> 1
+						'joined' 	=> date('Y-m-d H:i:s')
 					));
 					Session::flash('home','You have been registered and can now log in');
 					Redirect::to('index.php');

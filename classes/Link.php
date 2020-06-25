@@ -11,15 +11,19 @@
         switch ($type) {
           case 'featured':
             $data 	= $this->_db->get('featured_links', array('id', '=', $number));
-            $this->_data  = $data->first();
+            $this->_data  = $data->index(0);
             if ($data->count()) {
-              $this->_data  = $data->first();
+              $this->_data  = $data->index(0);
             }
             break;
           case "results_initial":
-            $data 	= $this->_db->get('links', array('id', '=', $number));
-            if ($data->count()) {
-              $this->_data  = $data->first();
+            $newLinks = $this->_db->getInOrder('new_links', 'created', 'ASC');
+            if ($newLinks->count()) {
+              $newLink = $newLinks->index($number);
+              $data 	= $this->_db->get('links', array('id', '=', $newLink->id));
+              if ($data->count()) {
+                $this->_data  = $data->index(0);
+              }
             }
             break;
           default:
@@ -35,7 +39,19 @@
 			}
       $data 	= $this->_db->get('links', array('hash', '=', $fields['hash']));
       if ($data->count()) {
-        $this->_data  = $data->first();
+        $this->_data  = $data->index(0);
+        //Maybe move functions such as newLink() and $log->createLink() here
+      }
+    }
+
+    public function newLink($fields = array()) {
+      if (!$this->_db->insert('new_links', $fields)) {
+        die("There was a problem creating your link"); // throw new Exception("There was a problem creating your link");
+			}
+      $newLinks = $this->_db->getInOrder('new_links', 'created', 'DESC'); // ASC / DESC
+      if ($newLinks->count()) {
+        $oldLink = $newLinks->index(0);
+        $this->_db->delete('new_links', array('id', '=', $oldLink->id));
       }
     }
 
@@ -45,7 +61,7 @@
 				$data 	= $this->_db->get('links', array($fields, '=', $link));
 
 				if ($data->count()) {
-					$this->_data = $data->first();
+					$this->_data = $data->index(0);
 					return true;
 				}
 			}

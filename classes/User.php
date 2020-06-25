@@ -49,7 +49,7 @@
 				$data 	= $this->_db->get('users', array($fields, '=', $user));
 
 				if ($data->count()) {
-					$this->_data = $data->first();
+					$this->_data = $data->index(0);
 					return true;
 				}
 			}
@@ -75,7 +75,7 @@
 									'HASH' 		=> $hash
 								));
 							} else {
-								$hash = $hashCheck->first()->hash;
+								$hash = $hashCheck->index(0)->hash;
 							}
 							Cookie::put($this->_cookieName, $hash, Config::get('remember/cookieExpiry'));
 						}
@@ -90,7 +90,7 @@
 		public function hasPermission($key) {
 			$group = $this->_db->get('groups', array('id', '=', $this->data()->userGroup));
 			if ($group->count()) {
-				$permissions = json_decode($group->first()->permissions,true);
+				$permissions = json_decode($group->index(0)->permissions,true);
 
 				if ($permissions[$key] == true) {
 					return true;
