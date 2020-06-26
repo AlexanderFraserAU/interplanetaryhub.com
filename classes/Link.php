@@ -26,6 +26,9 @@
               }
             }
             break;
+          case "results_search":
+
+            break;
           default:
             // code...
             break;

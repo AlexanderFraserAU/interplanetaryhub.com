@@ -23,6 +23,12 @@
           'unique' => 'links',
           'min'		=> 45,
 					'max'		=> 47
+        ),
+        'file' => array(
+          'fieldName' => 'File',
+          'required' => true,
+          'min'		=> 2,
+					'max'		=> 99
         )
 			));
 
@@ -33,6 +39,7 @@
 					$link->create(array(
 						'name' => Input::get('hashname'),
             'hash' => Input::get('hash'),
+            'file_extension' => Input::get('file'),
             'created' => date('Y-m-d H:i:s'),
             'user_id' => $user->data()->id
 					));
@@ -68,6 +75,10 @@
 	<div class="field">
 		<label for="hash">Hash</label>
 		<input type="text" name="hash" id="hash" autocomplete="off"/>
+	</div>
+  <div class="field">
+		<label for="file">File</label>
+		<input type="text" name="file" id="file" autocomplete="off"/>
 	</div>
   <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
 	<input type="submit" value="Create"/>

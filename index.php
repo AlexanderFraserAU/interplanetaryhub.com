@@ -54,7 +54,7 @@ if ($user->isLoggedIn()) {
     //   $link = new Link($i, $location);
     //   echo "<script> addResult({$i}, {$location}, {$link->data()->name}, {$link->data()->hash}, {$link->data()->upvotes}, {$link->data()->downvotes}) </script>";
     // }
-    for ($i=0; $i <= 5; $i++) { //Results
+    for ($i=0; $i <= 10; $i++) { //Results
       $location = "results_initial";
       $link = new Link($i, $location);
       $location = explode('_', $location);
@@ -62,8 +62,9 @@ if ($user->isLoggedIn()) {
       $data = json_decode(json_encode($link->data()), 1);
       $name = $data['name']; $name = '"' . $name . '"';
       $hash = $data['hash']; $hash = '"' . $hash . '"';
+      $file = $data['file_extension']; $file = '"' . $file . '"';
       $upvotes = $data['upvotes']; $downvotes = $data['downvotes'];
-      echo "<script> addResult({$i}, {$location}, {$name}, {$hash}, {$upvotes}, {$downvotes}) </script>";
+      echo "<script> addResult({$i}, {$location}, {$name}, {$hash}, {$file}, {$upvotes}, {$downvotes}) </script>";
     }
   } catch (Exception $e) {
     die($e->getMessage());
