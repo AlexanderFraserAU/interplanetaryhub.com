@@ -102,6 +102,7 @@ function linkViewModal(name, hash, file, upvotes, downvotes) {
   scoreDiv.appendChild(downvotesText);
 
   let link_hash = document.createElement("input"); //Link identfier
+  link_hash.classList.add("link_hash");
   link_hash.type = "hidden";
   link_hash.name = "link_hash";
   link_hash.value = hash;

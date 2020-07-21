@@ -21,6 +21,21 @@ if ($user->isLoggedIn()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <script src="javascript/script.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- Obscure all javascript!-->
+    <script>
+      $(document).ready(function() {
+        $(".votebutton").click(function() {
+          let vote = $(this).val();
+          let token = $(this).parent().find(".token").val();
+          let link_hash = $(this).parent().find(".link_hash").val();
+          $.post("vote.php", {
+            vote: vote,
+            token: token,
+            link_hash: link_hash
+          });
+        });
+      });
+    </script>
 <body>
 
   <div class="logo">Logo</div>
@@ -51,10 +66,10 @@ if ($user->isLoggedIn()) {
     <!-- Modal content -->
     <div id="hashModalContent" class="modal-content">
       <span class="close">&times;</span>
-      <form method="post" action="vote.php" id="hashModalForm">
-        <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
-        <button type="input" name="vote" value="2">upvote</button>
-        <button type="input" name="vote" value="3">downvote</button>
+      <form method="post" id="hashModalForm">
+        <input class="token" type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
+        <button class="votebutton" type="input" value="2">upvote</button>
+        <button class="votebutton" type="input" value="3">downvote</button>
     </div>
 
   </div>

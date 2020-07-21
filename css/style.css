@@ -73,7 +73,7 @@ body {
   display: grid;
   grid-template-areas:
     "hash-info score";
-  grid-template-columns: 95% 5%;
+  grid-template-columns: 93% 7%;
   border: 1px solid #888;
 }
 
