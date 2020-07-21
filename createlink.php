@@ -51,7 +51,7 @@
             'user_id' => $user->data()->id,
             'activity_type' => 1,
             'activity_reference' => $link->data()->id,
-            'created' => $user->data()->created
+            'created' => $user->data()->created //Not working
           ));
 					Session::flash('home','Your link has been created');
 					Redirect::to('index.php');

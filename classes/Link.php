@@ -71,6 +71,28 @@
 			return false;
     }
 
+    public function vote($type, $hash) {
+      $data = $this->_db->get('links', array('hash', '=', $hash));
+      if ($data->count()) {
+        $this->_data = $data->index(0);
+        switch ($type) {
+          case '2':
+            if (!$this->_db->increment('links', $this->_data->id, 'upvotes')) {
+              die("There was a problem upvoting the link"); // throw new Exception("There was a problem creating your link");
+      			}
+            break;
+          case '3':
+            if (!$this->_db->increment('links', $this->_data->id, 'downvotes')) {
+              die("There was a problem downvoting the link"); // throw new Exception("There was a problem creating your link");
+      			}
+            break;
+          default:
+            die("There was a problem voting on the link");
+            break;
+        }
+      }
+    }
+
     public function getFeatured() {
       return;
     }

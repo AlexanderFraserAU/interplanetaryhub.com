@@ -37,16 +37,29 @@ if ($user->isLoggedIn()) {
     <div class="featured" id="featured">Featured
     </div>
     <div class="search">
-      <div class="filterbox">
-
-      </div>
       <input type="text" class="searchbar" placeholder="What are you looking for..."></input>
+      <div class="resultinfo">This will contain the type of fesults i.e. History, newest, search results (You have recieved 10,100 results in 2 seconds)</div>
       <div class="results" id="results">
       </div>
     </div>
   </main>
   <div class="footer">Footer</div>
+
+  <!-- Modal -->
+  <div id="hashModal" class="modal">
+
+    <!-- Modal content -->
+    <div id="hashModalContent" class="modal-content">
+      <span class="close">&times;</span>
+      <form method="post" action="vote.php" id="hashModalForm">
+        <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
+        <button type="input" name="vote" value="2">upvote</button>
+        <button type="input" name="vote" value="3">downvote</button>
+    </div>
+
+  </div>
 </body>
+
 <?php
   try {
     // for ($i=1; $i < 3; $i++) { //Featured
@@ -54,7 +67,8 @@ if ($user->isLoggedIn()) {
     //   $link = new Link($i, $location);
     //   echo "<script> addResult({$i}, {$location}, {$link->data()->name}, {$link->data()->hash}, {$link->data()->upvotes}, {$link->data()->downvotes}) </script>";
     // }
-    for ($i=0; $i <= 10; $i++) { //Results
+    echo "<script>";
+    for ($i=0; $i <= 5; $i++) { //Results
       $location = "results_initial";
       $link = new Link($i, $location);
       $location = explode('_', $location);
@@ -64,8 +78,9 @@ if ($user->isLoggedIn()) {
       $hash = $data['hash']; $hash = '"' . $hash . '"';
       $file = $data['file_extension']; $file = '"' . $file . '"';
       $upvotes = $data['upvotes']; $downvotes = $data['downvotes'];
-      echo "<script> addResult({$i}, {$location}, {$name}, {$hash}, {$file}, {$upvotes}, {$downvotes}) </script>";
+      echo "addResult({$i}, {$location}, {$name}, {$hash}, {$file}, {$upvotes}, {$downvotes});";
     }
+    echo "</script>";
   } catch (Exception $e) {
     die($e->getMessage());
   }

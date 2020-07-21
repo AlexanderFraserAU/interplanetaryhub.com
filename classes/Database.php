@@ -53,7 +53,7 @@
 				$value		= $where[2];
 
 				if (in_array($operator, $operators)) {
-					$sql = "{$action} FROM {$table} WHERE ${field} {$operator} ?";
+					$sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
 					if (!$this->query($sql, array($value))->error()) {
 						return $this;
 					}
@@ -105,16 +105,17 @@
 			return false;
 		}
 
-		public function update($table, $id, $fields = array()) {
-			$set 	= '';
+		public function update($table, $id, $fields = array(), $set='') {
 			$x		= 1;
 
-			foreach ($fields as $name => $value) {
-				$set .= "{$name} = ?";
-				if ($x<count($fields)) {
-					$set .= ', ';
+			if ($set=='') {
+				foreach ($fields as $name => $value) {
+					$set .= "{$name} = ?";
+					if ($x<count($fields)) {
+						$set .= ', ';
+					}
+					$x++;
 				}
-				$x++;
 			}
 
 			$sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
@@ -123,6 +124,10 @@
 				return true;
 			}
 			return false;
+		}
+
+		public function increment($table, $id, $field) {
+				$this->update($table, $id, array(), "{$field}={$field}+1");
 		}
 
 		public function results() {
