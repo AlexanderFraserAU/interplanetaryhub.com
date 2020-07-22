@@ -28,6 +28,18 @@ if ($user->isLoggedIn()) {
           let vote = $(this).val();
           let token = $(this).parent().find(".token").val();
           let link_hash = $(this).parent().find(".link_hash").val();
+          if (vote == "2") {
+            let currentVote = $(".upvotemodal").html();
+            parseInt(currentVote) + 1;
+            $(".upvotemodal").empty();
+            $(".upvotemodal").html(currentVote);
+            }
+          else if (vote == "3") {
+            let currentVote = $(".downvotemodal").html();
+            parseInt(currentVote) + 1;
+            $(".downvotemodal").empty();
+            $(".downvotemodal").html(currentVote);
+          }
           $.post("vote.php", {
             vote: vote,
             token: token,

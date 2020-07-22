@@ -14,7 +14,7 @@
         $log = new Log();
         try {
           $link->vote($type, Input::get('link_hash'));
-          $log->vote(array(
+          $log->vote(array( //Make this work
             'user_id' => $user->data()->id,
             'activity_type' => $type,
             'activity_reference' => $link->data()->id, //May not work
