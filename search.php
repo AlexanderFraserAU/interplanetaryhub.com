@@ -7,6 +7,7 @@
     for ($i=0; $i < count($searchTerms); $i++) {
       if (!$searchTerms[$i] == "") {
         $databaseResults[] = $_db->search('links', array("name", "hash", "file_extension", "created"), $searchTerms[$i], "%%");
+        $databaseResults[$i] = $databaseResults[$i]->results();
       }
     }
     foreach ($databaseResults as $$databaseResult) {
