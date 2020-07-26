@@ -17,8 +17,8 @@
           $log->vote(array( //Make this work
             'user_id' => $user->data()->id,
             'activity_type' => $type,
-            'activity_reference' => $link->data()->id, //May not work
-            'created' => $user->data()->created //Not working
+            'activity_reference' => $link->data()->id,
+            'created' => date('Y-m-d H:i:s') //May now be working, but may not be exsactly the same as the vote was created
           ));
         } catch (Exception $e) {
           die($e->getMessage());

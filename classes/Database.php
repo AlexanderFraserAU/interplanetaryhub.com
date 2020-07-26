@@ -130,6 +130,25 @@
 				$this->update($table, $id, array(), "{$field}={$field}+1");
 		}
 
+		public function search($table, $fields = array(), $searchKey, $searchMethod) { //Search method only works for %% curently
+			$x		= 1;
+
+			foreach ($fields as $column) {
+				$terms .= "{$column} LIKE '%{$searchKey}%'";
+				if ($x<count($fields)) {
+					$terms .= " OR ";
+				}
+				$x++;
+			}
+
+			$sql = "SELECT * FROM {$table} WHERE {$terms}";
+
+			if (!$this->query($sql, $fields)->error()) {
+				return $this;
+			}
+			return false;
+		}
+
 		public function results() {
 			return $this->_results;
 		}

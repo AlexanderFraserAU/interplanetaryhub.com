@@ -46,6 +46,19 @@ if ($user->isLoggedIn()) {
             link_hash: link_hash
           });
         });
+        $(".searchbar").keyup(function() {
+          console.log(1);
+          let search = $(".searchbar").val();
+          console.log(search);
+          if (search.charAt(search.length-1) == " ") {
+            $.post("search.php", {
+              search: search
+            });
+            // , function(data, status) {
+            //   //"data" will be a bunch of addResult() functions that will be run //This goes right above
+            // }
+          }
+        });
       });
     </script>
 <body>
@@ -78,7 +91,7 @@ if ($user->isLoggedIn()) {
     <!-- Modal content -->
     <div id="hashModalContent" class="modal-content">
       <span class="close">&times;</span>
-      <form method="post" id="hashModalForm">
+      <form id="hashModalForm">
         <input class="token" type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
         <button class="votebutton" type="input" value="2">upvote</button>
         <button class="votebutton" type="input" value="3">downvote</button>

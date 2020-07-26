@@ -4,7 +4,7 @@
             $_data,
             $_type;
 
-    public function __construct($number = null, $type = null) {
+    public function __construct($number = null, $type = null, $input = null) {
       $this->_db 			= Database::getInstance();
 
       if ($type) {
@@ -27,7 +27,7 @@
             }
             break;
           case "results_search":
-
+            
             break;
           default:
             // code...
