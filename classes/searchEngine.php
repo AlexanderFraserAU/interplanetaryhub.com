@@ -17,8 +17,8 @@
         }
       }
       $tallyedResults = $this->tallyResults($databaseResults);
-      $talleyedResults = $this->removeDuplicates($tallyedResults);
-      $tallyedResultsInOrder = $this->orderResults($tallyedResults);
+      $talleyedResultsDuplicateFree = $this->removeDuplicates($tallyedResults);
+      $tallyedResultsInOrder = $this->orderResults($talleyedResultsDuplicateFree);
       return $tallyedResultsInOrder;
     }
 
@@ -75,6 +75,7 @@
           }
         }
         $tallyedResultsInOrder[$i] = $tallyedResults[$searchScoreLargestIndex];
+        $tallyedResults[$searchScoreLargestIndex]->searchScore = -1;
       }
       return $tallyedResultsInOrder;
     }
