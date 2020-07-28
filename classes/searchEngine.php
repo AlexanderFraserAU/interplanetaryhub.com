@@ -75,11 +75,42 @@
           }
         }
         $tallyedResultsInOrder[$i] = $tallyedResults[$searchScoreLargestIndex];
+        $tallyedResults[$searchScoreLargestIndex]->searchScoreSave = $tallyedResults[$searchScoreLargestIndex]->searchScore;
         $tallyedResults[$searchScoreLargestIndex]->searchScore = -1;
+      }
+      $resultsScores = array();
+      for ($i=0; $i < count($tallyedResultsInOrder); $i++) {
+        if ($tallyedResultsInOrder[$i]->upvotes == 0 && $tallyedResultsInOrder[$i]->downvotes == 0) {
+          $resultsScores[] = 1;
+        }
+        else if ($tallyedResultsInOrder[$i]->upvotes == 0) {
+          $resultsScores[] = 1 / $tallyedResultsInOrder[$i]->downvotes + 0.0001;
+        }
+        else if ($tallyedResultsInOrder[$i]->downvotes == 0) {
+          $resultsScores[] = $tallyedResultsInOrder[$i]->upvotes / 1 + 0.0001;
+        }
+        else {
+          $resultsScores[] = $tallyedResultsInOrder[$i]->upvotes / $tallyedResultsInOrder[$i]->downvotes;
+        }
+      }
+      for ($i=0; $i < count($tallyedResultsInOrder); $i++) {
+        if ($tallyedResultsInOrder[$i]->searchScoreSave == $tallyedResultsInOrder[$i+1]->searchScoreSave) {
+          if ($resultsScores[$i] < $resultsScores[$i+1]) {
+            //Swap the resultsScore
+            $swap = $resultsScores[$i];
+            $resultsScores[$i] = $resultsScores[$i+1];
+            $resultsScores[$i+1] = $swap;
+            //Swap the results
+            $swap = $tallyedResultsInOrder[$i];
+            $tallyedResultsInOrder[$i] = $tallyedResultsInOrder[$i+1];
+            $tallyedResultsInOrder[$i+1] = $swap;
+            $i=0;
+          }
+        }
       }
       return $tallyedResultsInOrder;
     }
 
   }
-
+//Batman Dark
  ?>
