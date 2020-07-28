@@ -11,7 +11,11 @@
     public function search($searchTerms) {
       $databaseResults = array();
       for ($i=0; $i < count($searchTerms); $i++) {
-        if (!$searchTerms[$i] == "") {
+        if (strlen($searchTerms[$i]) < 30) { //If the word is smaller than 30 chars its most likely its not a hash
+          $databaseResults[] = $this->_db->search('links', array("name", "file_extension", "created"), $searchTerms[$i], "%%");
+          $databaseResults[$i] = $databaseResults[$i]->results();
+        }
+        else {
           $databaseResults[] = $this->_db->search('links', array("name", "hash", "file_extension", "created"), $searchTerms[$i], "%%");
           $databaseResults[$i] = $databaseResults[$i]->results();
         }
