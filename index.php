@@ -47,22 +47,23 @@ if ($user->isLoggedIn()) {
           });
         });
         $(".searchbar").keyup(function() {
-          console.log(1);
           let search = $(".searchbar").val();
-          console.log(search);
           if (search.charAt(search.length-1) == " ") {
             $.post("search.php", {
               search: search
+            }, function(data, status) {
+              $(".result").remove();
+              let results = JSON.parse(data)
+              for (var i = 0; i < results.length; i++) {
+                addResult(i, "results", results[i].name, results[i].hash, results[i].file, results[i].upvotes, results[i].downvotes);
+              }
             });
-            // , function(data, status) {
-            //   //"data" will be a bunch of addResult() functions that will be run //This goes right above
-            // }
           }
         });
       });
     </script>
 <body>
-
+Batman Dark
   <div class="logo">Logo</div>
   <div class="nav">Nav
     <p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?></a>!</p>

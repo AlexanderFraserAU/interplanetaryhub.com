@@ -1,8 +1,8 @@
-<?php //Add exception errors
+<?php //Add exception errors //Batman Dark
   class SearchEngine {
     private $_db,
             $_comparedIds = array(0), //Array of comapred ID's
-            $_resultsIds = array(0);
+            $_resultsIds = array(0); //Maybe redundant/unused
 
     public function __construct() {
       $this->_db 			= Database::getInstance();
@@ -22,7 +22,7 @@
       return $tallyedResultsInOrder;
     }
 
-    public function tallyResults($databaseResults = array()) {
+    public function tallyResults($databaseResults = array()) { //Compares if there are duplicate entries. IF thier are they get a point
       if (false) { //Do a check if there is only one result
         return $databaseResults;
       }
@@ -43,7 +43,7 @@
                 }
               }
             }
-          } //Batman Dark
+          }
         }
       }
       return $databaseResults;
@@ -67,44 +67,46 @@
 
     public function orderResults($tallyedResults = array()) { //Orders by search score and votes
       $tallyedResultsInOrder = array();
-      for ($i=0; $i < count($tallyedResults); $i++) {
+      for ($i=0; $i < count($tallyedResults); $i++) { //Orders by search score first
         $searchScoreLargestIndex = 0;
         for ($a=0; $a < count($tallyedResults); $a++) {
           if ($tallyedResults[$a]->searchScore > $tallyedResults[$searchScoreLargestIndex]->searchScore) {
             $searchScoreLargestIndex = $a;
           }
         }
-        $tallyedResultsInOrder[$i] = $tallyedResults[$searchScoreLargestIndex];
+        $tallyedResultsInOrder[$i] = $tallyedResults[$searchScoreLargestIndex]; //Keeps searchScore Avaliable as searchScoreSave
         $tallyedResults[$searchScoreLargestIndex]->searchScoreSave = $tallyedResults[$searchScoreLargestIndex]->searchScore;
         $tallyedResults[$searchScoreLargestIndex]->searchScore = -1;
       }
       $resultsScores = array();
-      for ($i=0; $i < count($tallyedResultsInOrder); $i++) {
+      for ($i=0; $i < count($tallyedResultsInOrder); $i++) { // Deal with / by 0
         if ($tallyedResultsInOrder[$i]->upvotes == 0 && $tallyedResultsInOrder[$i]->downvotes == 0) {
           $resultsScores[] = 1;
         }
         else if ($tallyedResultsInOrder[$i]->upvotes == 0) {
-          $resultsScores[] = 1 / $tallyedResultsInOrder[$i]->downvotes + 0.0001;
+          $resultsScores[] = 1 / $tallyedResultsInOrder[$i]->downvotes - 0.0001; //The 0.01 gives those who only have downvotes a slight disadvantage over those with no votes
         }
         else if ($tallyedResultsInOrder[$i]->downvotes == 0) {
-          $resultsScores[] = $tallyedResultsInOrder[$i]->upvotes / 1 + 0.0001;
+          $resultsScores[] = $tallyedResultsInOrder[$i]->upvotes / 1 + 0.0001; //The 0.01 gives those who only have upvotes an advantage
         }
         else {
           $resultsScores[] = $tallyedResultsInOrder[$i]->upvotes / $tallyedResultsInOrder[$i]->downvotes;
         }
       }
-      for ($i=0; $i < count($tallyedResultsInOrder); $i++) {
-        if ($tallyedResultsInOrder[$i]->searchScoreSave == $tallyedResultsInOrder[$i+1]->searchScoreSave) {
-          if ($resultsScores[$i] < $resultsScores[$i+1]) {
-            //Swap the resultsScore
-            $swap = $resultsScores[$i];
-            $resultsScores[$i] = $resultsScores[$i+1];
-            $resultsScores[$i+1] = $swap;
-            //Swap the results
-            $swap = $tallyedResultsInOrder[$i];
-            $tallyedResultsInOrder[$i] = $tallyedResultsInOrder[$i+1];
-            $tallyedResultsInOrder[$i+1] = $swap;
-            $i=0;
+      for ($i=0; $i < count($tallyedResultsInOrder); $i++) { //Order results according to search score and votes
+        if ($tallyedResultsInOrder[$i+1] != null) {
+          if ($tallyedResultsInOrder[$i]->searchScoreSave == $tallyedResultsInOrder[$i+1]->searchScoreSave) {
+            if ($resultsScores[$i] < $resultsScores[$i+1]) {
+              //Swap the resultsScore
+              $swap = $resultsScores[$i];
+              $resultsScores[$i] = $resultsScores[$i+1];
+              $resultsScores[$i+1] = $swap;
+              //Swap the results
+              $swap = $tallyedResultsInOrder[$i];
+              $tallyedResultsInOrder[$i] = $tallyedResultsInOrder[$i+1];
+              $tallyedResultsInOrder[$i+1] = $swap;
+              $i=0;
+            }
           }
         }
       }
@@ -112,5 +114,4 @@
     }
 
   }
-//Batman Dark
  ?>

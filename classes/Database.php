@@ -132,6 +132,7 @@
 
 		public function search($table, $fields = array(), $searchKey, $searchMethod) { //Search method only works for %% curently
 			$x		= 1;
+			$terms;
 
 			foreach ($fields as $column) {
 				$terms .= "{$column} LIKE '%{$searchKey}%'";
