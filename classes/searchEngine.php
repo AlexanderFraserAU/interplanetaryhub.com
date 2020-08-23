@@ -1,4 +1,4 @@
-<?php //Add exception errors //Batman Dark
+<?php //Add exception errors //Batman Dark //This is awfully designed
   class SearchEngine {
     private $_db,
             $_comparedIds = array(0), //Array of comapred ID's
@@ -109,7 +109,7 @@
               $swap = $tallyedResultsInOrder[$i];
               $tallyedResultsInOrder[$i] = $tallyedResultsInOrder[$i+1];
               $tallyedResultsInOrder[$i+1] = $swap;
-              $i=0;
+              $i=-1;
             }
           }
         }

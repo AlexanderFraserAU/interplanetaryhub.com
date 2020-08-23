@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 375px auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "logo subgrid";
+  background-color: #3D00A7;
+  height: 280px;
+  border-radius: 0px 0px 0px 70px;
+  box-shadow: -1px 3px 5px black;
+}
+
+#solar-system {
+  grid-area: logo;
+  margin-top: 35px;
+  margin-left: 25px;
+}
+
+.header-subgird {
+  grid-area: subgrid;
+  display: grid;
+  grid-template-columns: auto 120px 120px;
+  grid-template-rows: auto 185px;
+  grid-template-areas:
+    "name signin signup"
+    "searchbar searchbar searchbar";
+  margin-right: 25px;
+  font-family: 'Vast Shadow', cursive;
+}
+
+#name {
+  color: yellow;
+  font-size: 50px;
+  grid-area: name;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header-button {
+  color: yellow;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+#signin {
+  grid-area: signin;
+}
+
+#signup {
+  grid-area: signup;
+}
+
+input.searchbar {
+  grid-area: searchbar;
+  padding: 20px;
+  height: 150px;
+	border: 1px solid #ccc;
+	-moz-border-radius: 40px;
+	-webkit-border-radius: 40px;
+	border-radius: 40px;
+	-moz-box-shadow: 5px 5px 0px #666;
+	-webkit-box-shadow: 5px 5px 0px #666;
+	box-shadow: 5px 5px 0px #666;
+	font-size: 50px;
+	padding: 0px 30px;
+	outline: 0;
+	-webkit-appearance: none;
+}
+input.searchbar:focus {
+  border: 1px solid #00ff2a;
+}

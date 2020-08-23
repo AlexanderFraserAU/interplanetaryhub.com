@@ -4,17 +4,12 @@ if (Session::exists('home')) {
   echo Session::flash('home');
 }
 
-
-
 $user = new User();
 if ($user->isLoggedIn()) {
-
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 
 <head>
     <meta charset="UTF-8">
@@ -40,7 +35,7 @@ if ($user->isLoggedIn()) {
             $(".downvotemodal").empty();
             $(".downvotemodal").html(currentVote);
           }
-          $.post("vote.php", {
+          $.post("vote.php", { // Make it so that the page does not reload
             vote: vote,
             token: token,
             link_hash: link_hash
@@ -55,7 +50,7 @@ if ($user->isLoggedIn()) {
               $(".result").remove();
               let results = JSON.parse(data)
               for (var i = 0; i < results.length; i++) {
-                addResult(i, "results", results[i].name, results[i].hash, results[i].file, results[i].upvotes, results[i].downvotes);
+                addResult(i, "results", results[i].name, results[i].hash, results[i].file_extension, results[i].upvotes, results[i].downvotes);
               }
             });
           }
@@ -85,10 +80,8 @@ Batman Dark
     </div>
   </main>
   <div class="footer">Footer</div>
-
   <!-- Modal -->
   <div id="hashModal" class="modal">
-
     <!-- Modal content -->
     <div id="hashModalContent" class="modal-content">
       <span class="close">&times;</span>
@@ -97,34 +90,10 @@ Batman Dark
         <button class="votebutton" type="input" value="2">upvote</button>
         <button class="votebutton" type="input" value="3">downvote</button>
     </div>
-
   </div>
 </body>
 
 <?php
-  try {
-    // for ($i=1; $i < 3; $i++) { //Featured
-    //   $location = "featured";
-    //   $link = new Link($i, $location);
-    //   echo "<script> addResult({$i}, {$location}, {$link->data()->name}, {$link->data()->hash}, {$link->data()->upvotes}, {$link->data()->downvotes}) </script>";
-    // }
-    echo "<script>";
-    for ($i=0; $i <= 5; $i++) { //Results
-      $location = "results_initial";
-      $link = new Link($i, $location);
-      $location = explode('_', $location);
-      $location = $location[0]; $location = '"' . $location . '"';
-      $data = json_decode(json_encode($link->data()), 1);
-      $name = $data['name']; $name = '"' . $name . '"';
-      $hash = $data['hash']; $hash = '"' . $hash . '"';
-      $file = $data['file_extension']; $file = '"' . $file . '"';
-      $upvotes = $data['upvotes']; $downvotes = $data['downvotes'];
-      echo "addResult({$i}, {$location}, {$name}, {$hash}, {$file}, {$upvotes}, {$downvotes});";
-    }
-    echo "</script>";
-  } catch (Exception $e) {
-    die($e->getMessage());
-  }
 	} else {
 		echo "<p>You need to <a href='login.php'>login</a> or <a href='register.php'>register</a></p>";
 	}
