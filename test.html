@@ -1,26 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/test.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vast+Shadow&display=swap" rel="stylesheet">
-    <script src="javascript/script.js" type="text/javascript">
-    </script>
+    <script src="javascript/script.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
-  <div class="header">
+  <div id="header">
     <svg id="solar-system" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 972.34 569.59"><defs><style>.cls-1{fill:blue;}.cls-1,.cls-10,.cls-11,.cls-5,.cls-6,.cls-7,.cls-8,.cls-9{stroke:#000;stroke-miterlimit:10;}.cls-1,.cls-10,.cls-5,.cls-7{stroke-width:2px;}.cls-2,.cls-7{fill:#f15a24;}.cls-3,.cls-5{fill:#3cf;}.cls-4{fill:#f9ca11;}.cls-11,.cls-6{fill:#fff;}.cls-8{fill:#39b54a;}.cls-11,.cls-8,.cls-9{stroke-width:0.5px;}.cls-9{fill:gray;}.cls-10{fill:#f9cc11;}</style></defs><ellipse class="cls-1" cx="682.11" cy="521.6" rx="435.74" ry="160.24" transform="translate(-368.51 156.05) rotate(-28.15)"/><circle class="cls-2" cx="290.47" cy="709.19" r="87.36" transform="translate(-619.51 185.66) rotate(-45)"/><circle class="cls-3" cx="864.19" cy="87.36" r="87.36"/><ellipse class="cls-4" cx="474.9" cy="272.76" rx="218.95" ry="212.37"/><path class="cls-5" d="M1059.2,401.79c28.32-52.05,4.41-87,4.41-87" transform="translate(-203.11 -227.45)"/><path class="cls-6" d="M356.93,765.88" transform="translate(-203.11 -227.45)"/><path class="cls-7" d="M362.72,767.11c-63.08-13-66.13-32.58-64.81-39.94" transform="translate(-203.11 -227.45)"/><ellipse class="cls-8" cx="1019.24" cy="340.72" rx="33.9" ry="59.65" transform="translate(-243.3 293.7) rotate(-28.15)"/><ellipse class="cls-8" cx="1102.11" cy="257.95" rx="22.34" ry="45.1" transform="translate(124.56 855.98) rotate(-60)"/><circle class="cls-9" cx="942.89" cy="73.9" r="29.21"/><path class="cls-10" d="M646.55,715.06c102-42.71,142.8-67.85,238.12-131" transform="translate(-203.11 -227.45)"/><ellipse class="cls-11" cx="294.88" cy="630.44" rx="8.43" ry="33.86" transform="translate(-560.55 645.64) rotate(-85.34)"/><ellipse class="cls-11" cx="1115.8" cy="376.86" rx="33.86" ry="8.43" transform="translate(-196.54 545.17) rotate(-38.3)"/><ellipse class="cls-11" cx="283.04" cy="792.13" rx="4.09" ry="27.71" transform="translate(-732.59 782.38) rotate(-85.34)"/></svg>
-    <div class="header-subgird">
+    <div id="header-subgird">
       <a href="#" id="name">Interplanetaryhub.com</a>
       <a href="#" id="signin" class="header-button">Sign-in</a>
       <a href="#" id="signup" class="header-button">Sign-up</a>
-      <input type="text" class="searchbar" placeholder="Search for a file..."></input>
+      <input type="text" id="searchbar" placeholder="Search for a file..."></input>
     </div>
   </div>
   <main>
-    <div class="file-type">
-
+    <div id="file-type">
+      <div id="file-tpe-word">
+        File Type
+      </div>
+      <form id="file-type-options">
+        <label>
+          <input type="radio" id="any" name="file-type-radio" value="any" checked="checked">
+          <span>Any</span>
+        </label>
+        <label>
+          <input type="radio" id="video" name="file-type-radio" value="video">
+          <span>Video</span>
+        </label>
+        <label>
+          <input type="radio" id="webpage" name="file-type-radio" value="webpage">
+          <span>Webpage</span>
+        </label>
+        <label>
+          <input type="radio" id="image" name="file-type-radio" value="image">
+          <span>Image</span>
+        </label>
+        <label>
+          <input type="radio" id="document" name="file-type-radio" value="document">
+          <span>Document</span>
+        </label>
+        <label>
+          <input type="radio" id="other" name="file-type-radio" value="other">
+          <span>Other</span>
+        </label>
+      </form>
     </div>
-    <div class="results">
-      Dogma
+    <div id="results">
+      <div id="filter-by-box">
+        <div id="filter-by">
+          Filter by:
+          <div id="relevance-selector">
+              Relevance ^
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <img src="https://p7.hiclipart.com/preview/819/333/198/video-camera-ico-icon-camera.jpg" alt="" class="file-image">
+        <div class="hash-info">
+          <div class="title">
+          Batman - The Dark Knight Rises
+          </div>
+          <a class="hash" id="hashresults0" target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:8080/ipfs/QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c/The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4" onclick="linkViewModal("Batman - The Dark Knight Rises", "QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c", "The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4", "35", "8")">QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c</a>
+          <div class="author">
+            Powikillyou1237512389712536,
+          </div>
+          <div class="time">
+             4 days ago
+          </div>
+        </div>
+        <div class="score">
+          <div class="upvotes">
+            10
+          </div>
+          <div class="slash">
+            /
+          </div>
+          <div class="downvotes">
+            2
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <img src="https://p7.hiclipart.com/preview/819/333/198/video-camera-ico-icon-camera.jpg" alt="" class="file-image">
+        <div class="hash-info">
+          <div class="title">
+          Batman - The Dark Knight Rises
+          </div>
+          <a class="hash" id="hashresults0" target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:8080/ipfs/QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c/The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4" onclick="linkViewModal("Batman - The Dark Knight Rises", "QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c", "The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4", "35", "8")">QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c</a>
+          <div class="author">
+            Powikillyou,
+          </div>
+          <div class="time">
+            4 days ago
+          </div>
+        </div>
+        <div class="score">
+          <div class="upvotes">
+            10
+          </div>
+          <div class="slash">
+            /
+          </div>
+          <div class="downvotes">
+            2
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <img src="https://p7.hiclipart.com/preview/819/333/198/video-camera-ico-icon-camera.jpg" alt="" class="file-image">
+        <div class="hash-info">
+          <div class="title">
+          Batman - The Dark Knight Rises
+          </div>
+          <a class="hash" id="hashresults0" target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:8080/ipfs/QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c/The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4" onclick="linkViewModal("Batman - The Dark Knight Rises", "QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c", "The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4", "35", "8")">QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c</a>
+          <div class="author">
+            Powikillyou,
+          </div>
+          <div class="time">
+             4 days ago
+          </div>
+        </div>
+        <div class="score">
+          <div class="upvotes">
+            10
+          </div>
+          <div class="slash">
+            /
+          </div>
+          <div class="downvotes">
+            2
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <img src="https://p7.hiclipart.com/preview/819/333/198/video-camera-ico-icon-camera.jpg" alt="" class="file-image">
+        <div class="hash-info">
+          <div class="title">
+          Batman - The Dark Knight Rises
+          </div>
+          <a class="hash" id="hashresults0" target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:8080/ipfs/QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c/The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4" onclick="linkViewModal("Batman - The Dark Knight Rises", "QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c", "The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4", "35", "8")">QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c</a>
+          <div class="author">
+            Powikillyou,
+          </div>
+          <div class="time">
+             4 days ago
+          </div>
+        </div>
+        <div class="score">
+          <div class="upvotes">
+            10
+          </div>
+          <div class="slash">
+            /
+          </div>
+          <div class="downvotes">
+            2
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <img src="https://p7.hiclipart.com/preview/819/333/198/video-camera-ico-icon-camera.jpg" alt="" class="file-image">
+        <div class="hash-info">
+          <div class="title">
+          Batman - The Dark Knight Rises
+          </div>
+          <a class="hash" id="hashresults0" target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:8080/ipfs/QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c/The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4" onclick="linkViewModal("Batman - The Dark Knight Rises", "QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c", "The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4", "35", "8")">QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c</a>
+          <div class="author">
+            Powikillyou,
+          </div>
+          <div class="time">
+             4 days ago
+          </div>
+        </div>
+        <div class="score">
+          <div class="upvotes">
+            10
+          </div>
+          <div class="slash">
+            /
+          </div>
+          <div class="downvotes">
+            2
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <img src="https://p7.hiclipart.com/preview/819/333/198/video-camera-ico-icon-camera.jpg" alt="" class="file-image">
+        <div class="hash-info">
+          <div class="title">
+          Batman - The Dark Knight Rises
+          </div>
+          <a class="hash" id="hashresults0" target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:8080/ipfs/QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c/The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4" onclick="linkViewModal("Batman - The Dark Knight Rises", "QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c", "The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4", "35", "8")">QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c</a>
+          <div class="author">
+            Powikillyou,
+          </div>
+          <div class="time">
+             4 days ago
+          </div>
+        </div>
+        <div class="score">
+          <div class="upvotes">
+            10
+          </div>
+          <div class="slash">
+            /
+          </div>
+          <div class="downvotes">
+            2
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <img src="https://p7.hiclipart.com/preview/819/333/198/video-camera-ico-icon-camera.jpg" alt="" class="file-image">
+        <div class="hash-info">
+          <div class="title">
+          Batman - The Dark Knight Rises
+          </div>
+          <a class="hash" id="hashresults0" target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:8080/ipfs/QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c/The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4" onclick="linkViewModal("Batman - The Dark Knight Rises", "QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c", "The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4", "35", "8")">QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c</a>
+          <div class="author">
+            Powikillyou,
+          </div>
+          <div class="time">
+             4 days ago
+          </div>
+        </div>
+        <div class="score">
+          <div class="upvotes">
+            10
+          </div>
+          <div class="slash">
+            /
+          </div>
+          <div class="downvotes">
+            2
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <img src="https://p7.hiclipart.com/preview/819/333/198/video-camera-ico-icon-camera.jpg" alt="" class="file-image">
+        <div class="hash-info">
+          <div class="title">
+          Batman - The Dark Knight Rises
+          </div>
+          <a class="hash" id="hashresults0" target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:8080/ipfs/QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c/The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4" onclick="linkViewModal("Batman - The Dark Knight Rises", "QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c", "The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4", "35", "8")">QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c</a>
+          <div class="author">
+            Powikillyou,
+          </div>
+          <div class="time">
+             4 days ago
+          </div>
+        </div>
+        <div class="score">
+          <div class="upvotes">
+            10
+          </div>
+          <div class="slash">
+            /
+          </div>
+          <div class="downvotes">
+            2
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <img src="https://p7.hiclipart.com/preview/819/333/198/video-camera-ico-icon-camera.jpg" alt="" class="file-image">
+        <div class="hash-info">
+          <div class="title">
+          Batman - The Dark Knight Rises
+          </div>
+          <a class="hash" id="hashresults0" target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:8080/ipfs/QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c/The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4" onclick="linkViewModal("Batman - The Dark Knight Rises", "QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c", "The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4", "35", "8")">QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c</a>
+          <div class="author">
+            Powikillyou,
+          </div>
+          <div class="time">
+             4 days ago
+          </div>
+        </div>
+        <div class="score">
+          <div class="upvotes">
+            10
+          </div>
+          <div class="slash">
+            /
+          </div>
+          <div class="downvotes">
+            2
+          </div>
+        </div>
+      </div>
+      <div class="result">
+        <img src="https://p7.hiclipart.com/preview/819/333/198/video-camera-ico-icon-camera.jpg" alt="" class="file-image">
+        <div class="hash-info">
+          <div class="title">
+          Batman - The Dark Knight Rises
+          </div>
+          <a class="hash" id="hashresults0" target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:8080/ipfs/QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c/The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4" onclick="linkViewModal("Batman - The Dark Knight Rises", "QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c", "The.Dark.Knight.Rises.2012.720p.BluRay.x264.YIFY.mp4", "35", "8")">QmfWQHVazH6so9p27z27rr8TJSdBFGpH7hunDcaZ1EAQ2c</a>
+          <div class="author">
+            Powikillyou,
+          </div>
+          <div class="time">
+             4 days ago
+          </div>
+        </div>
+        <div class="score">
+          <div class="upvotes">
+            10
+          </div>
+          <div class="slash">
+            /
+          </div>
+          <div class="downvotes">
+            2
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </body>
