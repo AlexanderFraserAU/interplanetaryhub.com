@@ -1,5 +1,6 @@
 <?php
 error_reporting(0); //Lol this is terrible. But i havent got any errors if i cant see them! :) PROBLEMS!
+date_default_timezone_set("UTC");
 session_start();
 $GLOBALS['config'] = array(
   'mysql' => array(

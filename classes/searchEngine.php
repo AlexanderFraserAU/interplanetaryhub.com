@@ -23,6 +23,17 @@
       $tallyedResults = $this->tallyResults($databaseResults);
       $talleyedResultsDuplicateFree = $this->removeDuplicates($tallyedResults);
       $tallyedResultsInOrder = $this->orderResults($talleyedResultsDuplicateFree);
+      $user = '';
+      for ($i=0; $i < count($tallyedResultsInOrder); $i++) { //Removes id and replaces user id with username, also removes search engine junk
+        unset($tallyedResultsInOrder[$i]->id);
+        unset($tallyedResultsInOrder[$i]->searchScore);
+        unset($tallyedResultsInOrder[$i]->searchScoreSave);
+        $user = $this->_db->get('users', array('id', '=', $tallyedResultsInOrder[$i]->user_id));
+        if ($user->count()) {
+          $tallyedResultsInOrder[$i]->username = $user->index(0)->username;
+          unset($tallyedResultsInOrder[$i]->user_id);
+        }
+      }
       return $tallyedResultsInOrder;
     }
 
