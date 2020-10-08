@@ -1,12 +1,21 @@
 <?php //Add exception errors //Batman Dark //This is awfully designed
+/*
+    $searchTerm = ["bat"];
+    $test = new SearchEngine();
+    $test->search($searchTerm);
+ */
+
   class SearchEngine {
     private $_db,
             $_comparedIds = array(0), //Array of comapred ID's
             $_resultsIds = array(0); //Maybe redundant/unused
+	    //$searchTerm = ["bat"];
 
     public function __construct() {
-      $this->_db 			= Database::getInstance();
+      $this->_db = Database::getInstance();
+	//echo print_r($this->_db); debug
     }
+
 
     public function search($searchTerms) {
       $databaseResults = array();
@@ -21,7 +30,10 @@
         }
       }
       $tallyedResults = $this->tallyResults($databaseResults);
+      //print_r($tallyedResults);
+      //echo "<br><br>";
       $talleyedResultsDuplicateFree = $this->removeDuplicates($tallyedResults);
+      $tallyedResultsDuplicateFree = array_unique($tallyedResults);
       $tallyedResultsInOrder = $this->orderResults($talleyedResultsDuplicateFree);
       $user = '';
       for ($i=0; $i < count($tallyedResultsInOrder); $i++) { //Removes id and replaces user id with username, also removes search engine junk
@@ -34,6 +46,7 @@
           unset($tallyedResultsInOrder[$i]->user_id);
         }
       }
+      //print_r($tallyedResultsInOrder);
       return $tallyedResultsInOrder;
     }
 
@@ -65,15 +78,17 @@
     }
 
     public function removeDuplicates($tallyedResults = array()) { //Puts all in one array and removes duplicates
+      //print_r($tallyedResults);
+      //echo "<br><br>";
       $duplicateFree = array();
       for ($a=0; $a < count($tallyedResults); $a++) {
         for ($b=0; $b < count($tallyedResults[$a]); $b++) {
           $needle = $tallyedResults[$a][$b]->id; //Neddle in haystack? Makes it 15x faster //May make it slower
-          $flipped_haystack = array_flip($this->$_resultsIds);  //https://www.php.net/manual/en/function.in-array.php
+          $flipped_haystack = array_flip($this->_resultsIds);  //https://www.php.net/manual/en/function.in-array.php
           if (isset($flipped_haystack[$needle])) {
             continue;
           }
-          $this->$_resultsIds[] = $tallyedResults[$a][$b]->id;
+          $this->_resultsIds[] = $tallyedResults[$a][$b]->id;
           $duplicateFree[] = $tallyedResults[$a][$b];
         }
       }

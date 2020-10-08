@@ -1,9 +1,10 @@
 <?php
+
 require_once 'core/init.php';
 if (Session::exists('home')) {
   echo Session::flash('home');
 }
-
+//setcookie('HASH', 'test', time() + 604800, '/');
 ?>
 
 <!DOCTYPE html>
@@ -41,11 +42,15 @@ if (Session::exists('home')) {
         $("#searchbar").keyup(function() {
           let search = $("#searchbar").val();
           if (search.charAt(search.length-1) == " ") {
+	console.log(search);
             $.post("search.php", {
               search: search
             }, function(data, status) {
+		console.log(status);
+		console.log(data);
               $(".result").remove();
-              let results = JSON.parse(data)
+              let results = JSON.parse(data);
+	      console.log(results);
               for (var i = 0; i < results.length; i++) {
                 addResult(i, "results", results[i].name, results[i].hash, results[i].file_extension, results[i].username, results[i].created, results[i].upvotes, results[i].downvotes);
               }

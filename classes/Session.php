@@ -4,6 +4,7 @@
 			return (isset($_SESSION[$name])) ? true : false;
 		}
 
+		// store value in session
 		public static function put($name, $value) {
 			return $_SESSION[$name] = $value;
 		}

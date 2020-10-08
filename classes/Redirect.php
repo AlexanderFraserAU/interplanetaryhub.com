@@ -12,6 +12,16 @@
 					}
 				}
 				header('Location: '.$location);
+				if( !headers_sent() ){
+ 					header('Location: '.$location);
+				}else{
+					 ?>
+ 					 <script type="text/javascript">
+  					 document.location.href="http://interplanetaryhub.com/";
+					console.log("Redirecting...");
+  					 </script>
+  					 <?php
+				}
 				exit();
 			}
 		}

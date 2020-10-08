@@ -7,9 +7,9 @@
 				$_isLoggedIn;
 
 		public function __construct($user = null) {
-			$this->_db 			= Database::getInstance();
-			$this->_sessionName = Config::get('session/sessionName');
-			$this->_cookieName = Config::get('remember/cookieName');
+			$this->_db = Database::getInstance();
+			$this->_sessionName = Config::get('session/sessionName'); //Config::get('session/sessionName');
+			$this->_cookieName = Config::get('remember/cookieName'); //Config::get('remember/cookieName');
 
 			if (!$user) {
 				if (Session::exists($this->_sessionName)) {
@@ -62,9 +62,8 @@
 			} else {
 				$user = $this->find($username);
 				if ($user) {
-					if ($this->data()->password === Hash::make($password,$this->data()->salt)) {
+					if ($this->data()->password === Hash::make($password,base64_decode($this->data()->salt))) { //Base64_decode because it was put like that into database
 						Session::put($this->_sessionName, $this->data()->id);
-
 						if ($remember) {
 							$hash = Hash::unique();
 							$hashCheck = $this->_db->get('users_session', array('user_id','=',$this->data()->id));
@@ -77,9 +76,9 @@
 							} else {
 								$hash = $hashCheck->index(0)->hash;
 							}
-							Cookie::put($this->_cookieName, $hash, Config::get('remember/cookieExpiry'));
+							//setcookie($this->_cookieName, $hash, config::get('remember/cookieExpiry'));
+							Cookie::put($this->_cookieName, $hash, Config::get('remember/cookieExpiry')); //Config::get('remember/cookieExpiry')
 						}
-
 						return true;
 					}
 				}

@@ -34,11 +34,14 @@
 			if ($validation->passed()) {
 				$user = new User();
 				$salt = Hash::salt(32);
+				echo $salt;
+				echo "<br>";
+				echo base64_encode($salt);
 				try {
 					$user->create(array(
 						'username' 	=> Input::get('username'),
 						'password' 	=> Hash::make(Input::get('password'),$salt),
-						'salt' 		=> $salt,
+						'salt' 		=> base64_encode($salt), //base64 to encode so that database can take it
 						'name' 		=> Input::get('name'),
 						'joined' 	=> date('Y-m-d H:i:s')
 					));
@@ -55,7 +58,6 @@
 		}
 	}
 ?>
-
 <form action="" method="post">
 	<div class="field">
 		<label for="username">Username</label>

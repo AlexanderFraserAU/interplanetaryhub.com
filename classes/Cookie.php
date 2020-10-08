@@ -9,12 +9,16 @@
 		}
 
 		public static function put($name, $value, $expiry) {
-			if (setcookie($name, $value, time()+$expiry, '/')) {
+			//var_dump(headers_list());
+			//echo "<br>";
+			//echo headers_sent();
+			//setcookie("DOG", "test", time() + $expiry, '/');
+			if (setcookie($name, $value, time() + $expiry, '/')) { 
 				return true;
 			}
 			return false;
 		}
-
+	
 		public static function delete($name) {
 			self::put($name, '', time()-1);
 		}

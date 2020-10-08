@@ -1,3 +1,5 @@
+
+
 <?php
 	require_once 'core/init.php';
 	if (Input::exists()) {
@@ -17,6 +19,7 @@
 			if ($validation->passed()) {
 				$user 		= new User();
 				$remember 	= (Input::get('remember') === 'on') ? true : false;
+
 				$login 		= $user->login(Input::get('username'),Input::get('password'), $remember);
 
 				if ($login) {
@@ -32,7 +35,6 @@
 		}
 	}
 ?>
-
 <form action="" method="post">
 	<div class="field">
 		<label for="username">Username</label>
