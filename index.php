@@ -42,15 +42,14 @@ if (Session::exists('home')) {
         $("#searchbar").keyup(function() {
           let search = $("#searchbar").val();
           if (search.charAt(search.length-1) == " ") {
-	console.log(search);
+            let fileType = $("#file-type-options input[type='radio']:checked").val();
+            console.log(fileType);
             $.post("search.php", {
-              search: search
+              search: search,
+              fileType: fileType
             }, function(data, status) {
-		console.log(status);
-		console.log(data);
               $(".result").remove();
               let results = JSON.parse(data);
-	      console.log(results);
               for (var i = 0; i < results.length; i++) {
                 addResult(i, "results", results[i].name, results[i].hash, results[i].file_extension, results[i].username, results[i].created, results[i].upvotes, results[i].downvotes);
               }
@@ -106,6 +105,10 @@ if (Session::exists('home')) {
           <span>Image</span>
         </label>
         <label>
+          <input type="radio" id="audio" name="file-type-radio" value="audio">
+          <span>Audio</span>
+        </label>
+        <label>
           <input type="radio" id="document" name="file-type-radio" value="document">
           <span>Document</span>
         </label>
@@ -118,9 +121,9 @@ if (Session::exists('home')) {
     <div id="results">
       <div id="filter-by-box">
         <div id="filter-by">
-          Filter by:
+          <!-- Filter by: -->
           <div id="relevance-selector">
-              Relevance ^
+              <!-- Relevance ^ -->
           </div>
         </div>
       </div>

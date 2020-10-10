@@ -21,8 +21,8 @@ session_start();
 $GLOBALS['config'] = array(
   'mysql' => array(
     'host' => 'localhost',
-    'username' => 'interplanetaryhub',
-    'password' => 'Warlus123!',
+    'username' => 'root', //interplanetaryhub
+    'password' => '', //Warlus123!
     'db' => 'interplanetaryhub'
   ),
   'remember'	=> array(
@@ -32,6 +32,23 @@ $GLOBALS['config'] = array(
   'session'	=> array(
     'sessionName'	=> 'user',
     'tokenName'		=> 'token'
+  ),
+  'filetypes' => array( //Maybe move this into its own globals
+    'video' => array(
+      'webm', 'mkv', 'flv', 'flv', 'vob', 'ogv', 'ogg', 'drc', 'gif', 'gifv', 'mng', 'avi', 'mts', 'm2ts', 'ts', 'mov', 'qt', 'wmv', 'yuv', 'rm', 'rmvb', 'viv', 'asf', 'amv', 'mp4', 'm4p', 'm4v', 'mpg', 'mp2', 'mpeg', 'mpe', 'mpv', 'm2v', 'svi', '3gp', '3g2', 'mxf', 'roq', 'nsv', 'flv', 'f4v', 'f4p', 'f4a', 'f4b'
+    ),
+    'webpage' => array(
+      'html', 'asp', 'php'
+    ),
+    'image' => array(
+      'bmp', 'tif', 'jpg', 'gif', 'png', 'svg'
+    ),
+    'audio' => array(
+      'mp3'
+    ),
+    'document' => array(
+      'pdf'
+    )
   )
 );
 
