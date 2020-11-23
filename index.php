@@ -4,7 +4,7 @@ require_once 'core/init.php';
 if (Session::exists('home')) {
   echo Session::flash('home');
 }
-//setcookie('HASH', 'test', time() + 604800, '/');
+//setcookie('HASH', 'test', time() + 604800, '/'); //asgfashjastfash
 ?>
 
 <!DOCTYPE html>
@@ -67,13 +67,16 @@ if (Session::exists('home')) {
       $user = new User();
       if (!$user->isLoggedIn()) {
       ?>
-      <a href="login.php" id="signin" class="header-button">Sign-in</a>
-      <a href="register.php" id="signup" class="header-button">Sign-up</a>
+      <a style="font-size: 180%" href="login.php" id="signin" class="header-button">Sign-in</a>
+      <a style="font-size: 180%" href="register.php" id="signup" class="header-button">Sign-up</a>
       <?php
       } else {
         ?>
+        <div id="create" class="header-button">
+          <a style="text-decoration: none" href="createlink.php">Create-Link</a>
+        </div>
         <div id="signin" class="header-button">
-          <a style="text-decoration: none" href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?></a>
+          <a style="text-decoration: none" href="profile.php?user=<?php echo escape($user->data()->username); ?>">User-Profile</a>
         </div>
         <a id="signup" class="header-button" href="logout.php">Log-out</a>
         <?php
@@ -126,6 +129,63 @@ if (Session::exists('home')) {
               <!-- Relevance ^ -->
           </div>
         </div>
+      </div>
+    </div>
+    <div id="loginModal" class="modal">
+      <div id="loginModalContent" class="modal-content">
+        <span class="close">&times;</span>
+        <?php
+        	require_once 'core/init.php';
+        	if (Input::exists()) {
+        		if (Token::check(Input::get('token'))) {
+        			$validate = new Validate();
+        			$validation = $validate->check($_POST, array(
+        				'username'	=> array(
+        					'fieldName'	=> 'Username',
+        					'required' 	=> true
+        				),
+        				'password'	=> array(
+        					'fieldName'	=> 'Password',
+        					'required' 	=> true
+        				)
+        			));
+
+        			if ($validation->passed()) {
+        				$user 		= new User();
+        				$remember 	= (Input::get('remember') === 'on') ? true : false;
+
+        				$login 		= $user->login(Input::get('username'),Input::get('password'), $remember);
+
+        				if ($login) {
+        					Redirect::to('index.php');
+        				} else {
+        					echo "Sorry we could not log you in";
+        				}
+        			} else {
+        				foreach ($validation->errors() as $error) {
+        					echo $error, '<br>';
+        				}
+        			}
+        		}
+        	}
+        ?>
+        <form action="" method="post">
+        	<div class="field">
+        		<label for="username">Username</label>
+        		<input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off"/>
+        	</div>
+        	<div class="field">
+        		<label for="password">Password</label>
+        		<input type="password" name="password" id="password"/>
+        	</div>
+        	<div class="field">
+        		<label for="remember">
+        			<input type="checkbox" name="remember" id="remember"/> Remember Me
+        		</label>
+        	</div>
+        	<input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
+        	<input type="submit" value="Login"/>
+        </form>
       </div>
     </div>
     <div id="hashModal" class="modal">
