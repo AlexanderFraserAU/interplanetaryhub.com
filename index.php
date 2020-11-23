@@ -43,7 +43,6 @@ if (Session::exists('home')) {
           let search = $("#searchbar").val();
           if (search.charAt(search.length-1) == " ") {
             let fileType = $("#file-type-options input[type='radio']:checked").val();
-            console.log(fileType);
             $.post("search.php", {
               search: search,
               fileType: fileType
