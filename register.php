@@ -34,9 +34,9 @@
 			if ($validation->passed()) {
 				$user = new User();
 				$salt = Hash::salt(32);
-				echo $salt;
-				echo "<br>";
-				echo base64_encode($salt);
+				// echo $salt;
+				// echo "<br>";
+				// echo base64_encode($salt);
 				try {
 					$user->create(array(
 						'username' 	=> Input::get('username'),

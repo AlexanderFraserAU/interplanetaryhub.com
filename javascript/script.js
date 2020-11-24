@@ -188,7 +188,7 @@ function calculateTimeDifference(created) {
   }
   let date = new Date();
   let year = date.getUTCFullYear();
-  let month = date.getUTCMonth();
+  let month = date.getUTCMonth() + 1;
   let dateofmonth = date.getUTCDate();
   let hours = date.getUTCHours();
   let minutes = date.getUTCMinutes();

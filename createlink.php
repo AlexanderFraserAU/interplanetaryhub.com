@@ -26,8 +26,7 @@
         ),
         'file' => array(
           'fieldName' => 'File',
-          'required' => true,
-          'min'		=> 2,
+          'min'		=> 0,
 					'max'		=> 99
         )
 			));
@@ -73,12 +72,12 @@
 		<input type="text" name="hashname" id="hashname" value="<?php echo escape(Input::get('hashname')); ?>" autocomplete="off"/>
 	</div>
 	<div class="field">
-		<label for="hash">Hash</label>
+		<label for="hash">Hash(CID)</label>
 		<input type="text" name="hash" id="hash" autocomplete="off"/>
 	</div>
   <div class="field">
 		<label for="file">File</label>
-		<input type="text" name="file" id="file" autocomplete="off"/>
+		<input type="text" name="file" id="file" autocomplete="off"/> If only a single file (no folder) leave blank
 	</div>
   <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
 	<input type="submit" value="Create"/>

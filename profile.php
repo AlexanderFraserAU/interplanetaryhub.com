@@ -3,7 +3,7 @@
 	if (!$username = Input::get('user')) {
 		Redirect::to('index.php');
 	} else {
-		$user = new User($username);
+		$user = new User(); //$username in args to take header info
 		if (!$user->exists()) {
 			Redirect::to(404);
 		} else {

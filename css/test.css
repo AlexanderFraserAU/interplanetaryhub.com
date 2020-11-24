@@ -38,11 +38,12 @@ body {
 #header-subgird {
   grid-area: subgrid;
   display: grid;
-  grid-template-columns: auto max-content 120px;
+  grid-template-columns: auto max-content max-content max-content;
   grid-template-rows: auto 185px;
   grid-template-areas:
-    "name signin signup"
-    "searchbar searchbar searchbar";
+    "name create signin signup"
+    "searchbar searchbar searchbar searchbar";
+  grid-gap: 0px 30px;
   margin-right: 25px;
 }
 
@@ -75,6 +76,10 @@ body {
 
 #signup {
   grid-area: signup;
+}
+
+#create {
+  grid-area: create;
 }
 
 #searchbar {
