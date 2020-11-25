@@ -198,3 +198,6 @@ if (Session::exists('home')) {
     </div>
   </main>
 </body>
+<div id="sizeWarning">
+  <p>Please use a device with a larger screen or zoom out</p>
+</div>
